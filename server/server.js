@@ -25,9 +25,10 @@ if (process.env.NODE_ENV === 'production') {
 app.use(routes);
 
 const startServer = async (typeDefs, resolvers) => {
-server.applyMiddleware({ app });
-db.once('open', () => {
-  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
-})};
+  await server.start();
+  server.applyMiddleware({ app });
+  db.once('open', () => {
+    app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
+  })};
 
 startServer(typeDefs, resolvers);
