@@ -31,7 +31,7 @@ const typeDefs = gql`
         image: String
         link: String
     }
-    //Mutations for modifying data
+    #Mutations for modifying data
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
