@@ -46,4 +46,6 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+//Added variable assignment to remove error
+const authServiceInstance = new AuthService();
+export default authServiceInstance;
