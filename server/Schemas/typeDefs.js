@@ -20,9 +20,6 @@ const typeDefs = gql`
         token: ID!
         user: User
     }
-    type Query {
-        me: User
-    }
     input BookInput {
         bookId: String!
         authors: [String]
