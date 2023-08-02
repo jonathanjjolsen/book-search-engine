@@ -28,11 +28,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 })
 
-const startServer = async (typeDefs, resolvers) => {
+const startServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
   db.once('open', () => {
     app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
   })};
 
-startServer(typeDefs, resolvers);
+startServer();

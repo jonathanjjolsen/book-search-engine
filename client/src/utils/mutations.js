@@ -2,73 +2,65 @@ import gql from 'graphql-tag';
 
 //Mutation for logging in a user
 export const LOGIN_USER = gql`
-mutation loginUser($email: String!, $password: String!) {
+  mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-        token
-        user {
+      token
+      user {
         _id
-        }
+        username
+      }
     }
-}`;
+  }
+`;
 
 //Mutation for creating a new user
 export const ADD_USER = gql`
-MUTATION addUser($username: String!, $email: String!, $password: String!) {
+  mutation addUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
-        user {
-            _id
-            username
-            email
-            bookCount
-            savedBooks {
-                authors
-                bookId
-                image
-                link
-                title
-                description
-            }
-        }
-        token
+      token
+      user {
+        _id
+        username
+      }
     }
-}`;
+  }
+`;
 
 //Mutation for saving a book to profile
 export const SAVE_BOOK = gql`
-MUTATION saveBook($input: savedBook!) {
-    saveBook(input: $input) {
-            _id
-            username
-            email
-            bookCount
-            savedBooks {
-                # _id
-                bookId
-                authors
-                image
-                link
-                title
-                description
-            }
-        }
-    }`;
+  mutation saveBook($bookInput: BookInput!) {
+    saveBook(bookInput: $bookInput) {
+      _id
+      username
+      email
+      savedBooks {
+        bookId
+        authors
+        image
+        description
+        title
+        link
+      }
+    }
+  }
+`;
 
 //Mutation for removing a book from profile
 export const REMOVE_BOOK = gql`
-MUTATION removeBook($bookId: String!) {
+  mutation removeBook($bookId: ID!) {
     removeBook(bookId: $bookId) {
-            _id
-            username
-            email
-            bookCount
-            savedBooks {
-                # _id
-                bookId
-                authors
-                image
-                link
-                title
-                description
-            }
-        }
-    }`;
+      _id
+      username
+      email
+      bookCount
+      savedBooks {
+        bookId
+        authors
+        image
+        link
+        title
+        description
+      }
+    }
+  }
+`;
