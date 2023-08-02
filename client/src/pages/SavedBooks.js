@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { removeBookId } from '../utils/localStorage';
+//importing useQuery and useMutation from apollo client
+import { useQuery, useMutation } from '@apollo/client';
+import { REMOVE_BOOK } from '../utils/mutations';
+import { QUERY_ME } from '../utils/queries';
+
 import {
   Container,
   Card,
@@ -7,10 +12,6 @@ import {
   Col
 } from 'react-bootstrap';
 
-import { removeBookId } from '../utils/localStorage';
-//importing useQuery and useMutation from apollo client
-import { useQuery, useMutation } from '@apollo/client';
-import { REMOVE_BOOK } from '../utils/mutations';
 
 const SavedBooks = () => {
   const { data } = useQuery(QUERY_ME);
