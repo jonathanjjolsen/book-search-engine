@@ -28,8 +28,8 @@ export const ADD_USER = gql`
 
 //Mutation for saving a book to profile
 export const SAVE_BOOK = gql`
-  mutation saveBook($bookID: ID!, $authors: [String], $description: String, $title: String, $image: String, $link: String) {
-    saveBook(bookID: $bookID, authors: $authors, description: $description, title: $title, image: $image, link: $link) {
+  mutation saveBook($input: savedBook!) {
+    saveBook(input: $input) {
       _id
       username
       email
@@ -48,7 +48,7 @@ export const SAVE_BOOK = gql`
 
 //Mutation for removing a book from profile
 export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: String!) {
+  mutation removeBook($bookId: ID!) {
     removeBook(bookId: $bookId) {
       _id
       username
