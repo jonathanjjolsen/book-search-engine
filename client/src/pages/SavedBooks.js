@@ -1,9 +1,4 @@
-import { removeBookId } from '../utils/localStorage';
-//importing useQuery and useMutation from apollo client
-import { useQuery, useMutation } from '@apollo/client';
-import { REMOVE_BOOK } from '../utils/mutations';
-import { QUERY_ME } from '../utils/queries';
-
+import React from 'react';
 import {
   Container,
   Card,
@@ -11,23 +6,35 @@ import {
   Row,
   Col
 } from 'react-bootstrap';
+import Auth from '../utils/auth';
+import { removeBookId } from '../utils/localStorage';
+//importing useQuery and useMutation from apollo client
+import { useQuery, useMutation } from '@apollo/client';
+import { REMOVE_BOOK } from '../utils/mutations';
+import { QUERY_ME } from '../utils/queries';
 
 
 const SavedBooks = () => {
-  const { data } = useQuery(QUERY_ME);
-  let userData = data?.me || {};
+  const { loading, data } = useQuery(QUERY_ME);
+  const userData = data?.me || {};
   const [removeBook] = useMutation(REMOVE_BOOK);
-  async function handleDeleteBook(bookId) {
+  const handleDeleteBook = async (bookId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if (!token) {
+      return false;
+    }
     try {
-      await removeBook({
-        variables: { bookId: bookId }
-      });
+      const { data } = await removeBook({ variables: { bookId } });
       removeBookId(bookId);
     }
     catch (err) {
       console.error(err);
     }
   };
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  };
+
 
   return (
     <>
