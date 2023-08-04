@@ -30,12 +30,11 @@ const LoginForm = () => {
       event.preventDefault();
       event.stopPropagation();
     }
-
     try {
       const { data } = await loginUser({
         variables: {...userFormData}
       });
-
+      //passes token back to Auth.js
       Auth.login(data.login.token);
     } catch (err) {
       console.error(err);

@@ -32,13 +32,14 @@ const resolvers = {
           try{
             const user = await User.create({ username, email, password });
           const token = signToken(user);
-          
           return { token, user };
           } catch (err) {
+            //console.log to see what error is
+            //I left it in on purpose because it was so helpful in the development process
+            //It enabled me to what was wrong with my heroku deployment, and why it was not adding a user
             console.log(err);
             throw err;
           }
-
         },
         saveBook: async (parent, { input }, context) => {
           if (context.user) {
